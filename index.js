@@ -24,7 +24,6 @@ client.on('messageCreate', async (msg) => {
     const message = msg
     if(message.content.startsWith(prefixo)) {
         const connection = await makeBotJoinvoiceChannel(message)
-        // checkIf2MinutesPassed(message)
         playMp3(connection, message)
     }
 });
@@ -39,21 +38,6 @@ makeBotJoinvoiceChannel = async (message) => {
         adapterCreator: message.guild.voiceAdapterCreator
     })
 }
-
-// // method to check if 2 minutes has passedfrom last message
-// // if so, leave the voice channel
-// // if not, reset the timer
-// // if the bot is not in a voice channel, join the voice channel
-// function checkIf2MinutesPassed(message) {
-//     if(message.member.voice.channel) {
-//         console.log(message.guild.voiceStates.connection);
-//         if(message.member.voice.channel.id === message.guild.voice.connection.channel.id) {
-//             if(message.createdTimestamp - message.guild.voiceStates.connection.channel.lastMessageTimestamp > 120000) {
-//                 message.guild.voice.connection.disconnect();
-//             }
-//         }
-//     }
-// }
 
 // method to relate mp3 name with the message
 // if the message is a command, play the mp3 file
@@ -77,17 +61,4 @@ function playMp3File(connection, message) {
     player.on('end', () => {
         connection.disconnect()
     })    
-}
-
-//method to check if two minutes have passed since the last message
-// if so, leave the voice channel
-// if not, reset the timer
-function checkIf2MinutesPassed(message) {
-    if(message.member.voice.channel) {
-        if(message.member.voice.channel.id === message.guild.voice.connection.channel.id) {
-            if(message.createdTimestamp - message.guild.voiceStates.connection.channel.lastMessageTimestamp > 120000) {
-                message.guild.voice.connection.disconnect();
-            }
-        }
-    }
 }
