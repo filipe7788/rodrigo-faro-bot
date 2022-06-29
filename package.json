@@ -1,4 +1,14 @@
 {
+  "name": "rodrigo faro bot",
+  "version": "1.0",
+  "engines": {
+    "node": "16.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
     "@discordjs/opus": "^0.7.0",
