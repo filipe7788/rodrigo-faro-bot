@@ -78,3 +78,16 @@ function playMp3File(connection, message) {
         connection.disconnect()
     })    
 }
+
+//method to check if two minutes have passed since the last message
+// if so, leave the voice channel
+// if not, reset the timer
+function checkIf2MinutesPassed(message) {
+    if(message.member.voice.channel) {
+        if(message.member.voice.channel.id === message.guild.voice.connection.channel.id) {
+            if(message.createdTimestamp - message.guild.voiceStates.connection.channel.lastMessageTimestamp > 120000) {
+                message.guild.voice.connection.disconnect();
+            }
+        }
+    }
+}
